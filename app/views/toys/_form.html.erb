@@ -1,0 +1,29 @@
+<%= form_for(@toy) do |f| %>
+  <% if @toy.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@toy.errors.count, "error") %> prohibited this toy from being saved:</h2>
+
+      <ul>
+      <% @toy.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :toy_name %><br />
+    <%= f.text_field :toy_name %>
+  </div>
+  <div class="field">
+    <%= f.label :desc %><br />
+    <%= f.text_field :desc %>
+  </div>
+  <div class="field">
+    <%= f.label :moments %><br />
+    <%= f.text_field :moments %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

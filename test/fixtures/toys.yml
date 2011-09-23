@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  toy_name: MyString
+  desc: MyString
+  moments: MyString
+
+two:
+  toy_name: MyString
+  desc: MyString
+  moments: MyString

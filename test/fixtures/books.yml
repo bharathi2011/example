@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  title: MyString
+  author: MyString
+  price: 1.5
+  comments: MyString
+  subject_id: 1
+
+two:
+  title: MyString
+  author: MyString
+  price: 1.5
+  comments: MyString
+  subject_id: 1
