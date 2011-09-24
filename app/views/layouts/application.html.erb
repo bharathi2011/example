@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>Example</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
-  <%= csrf_meta_tag %>
-</head>
-<body>
+   <html>
+     <head>
+       <title><%= yield(:title) || "Untitled" %></title>
+       <%= stylesheet_link_tag "application" %>
+       <%= javascript_include_tag :defaults %>
+       <%= csrf_meta_tag %>
+       <%= yield(:head) %>
+     </head>
+     <body>
+        <div id="container">
+          <% flash.each do |subject_name, msg| %>
+          <%= content_tag :div, msg, :id => "flash_#{subject_name}" %>
+          <% end %>
 
-<%= yield %>
-
-</body>
-</html>
+          <%= content_tag :h1, yield(:title) %>
+          <%= yield %>
+        </div>
+     </body>
+   </html>

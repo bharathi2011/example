@@ -1,10 +1,22 @@
-<h1>Listing books</h1>
+<% title "Books" %>
 
-<table>
+<%= form_tag books_path, :method => 'get', :id => "books_search" do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :title => nil %>
+  </p>
+  <div id="books"><%= render 'books' %></div>
+<% end %>
+<%= link_to 'Add a New Book to collections', new_book_path %>
+
+
+
+
+<!--table>
   <tr>
-    <th>Title</th>
-    <th>Author</th>
-    <th>Price</th>
+    <th><#%= sortable "title" %></th>
+    <th><%#= sortable "author" %></th>
+    <th><%#=sortable "price" %></th>
     <th>Comments</th>
     <th>Subject</th>
     <th></th>
@@ -12,21 +24,28 @@
     <th></th>
   </tr>
 
-<% @books.each do |book| %>
+<#% @books.each do |book| %>
   <tr>
-    <td><%= book.title %></td>
-    <td><%= book.author %></td>
-    <td><%= book.price %></td>
-    <td><%= book.comments %></td>
+    <td><#%= book.title %></td>
+    <td><#%= book.author %></td>
+    <td><#%= book.price %></td>
+    <td><#%= book.comments %></td>
     <td><%#= book.@subject_id %></td>
     <td><%#= book.@subject.subject_name %></td>
-    <td><%= link_to 'Show', book %></td>
-    <td><%= link_to 'Edit', edit_book_path(book) %></td>
-    <td><%= link_to 'Destroy', book, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%#= link_to 'Show', book %></td>
+    <td><%#= link_to 'Edit', edit_book_path(book) %></td>
+    <td><%#= link_to 'Destroy', book, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
-<% end %>
+<#% end %>
 </table>
-
+<%#= will_paginate @books%>
 <br />
+<%= link_to 'Add a New Book to collections', new_book_path %>
 
-<%= link_to 'New Book', new_book_path %>
+
+<br / --!>
+
+
+
+
+

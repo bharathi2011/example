@@ -47,6 +47,8 @@ class SubjectsController < ApplicationController
         #format.html { redirect_to(@subject, :notice => 'Subject was successfully created.') }
 
         format.xml  { render :xml => @subject, :status => :created, :location => @subject }
+        #AJAX
+        format.js
       else
         format.html { render :action => "new" }
         format.xml  { render :xml => @subject.errors, :status => :unprocessable_entity }
@@ -78,7 +80,9 @@ class SubjectsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(subjects_url) }
-      format.xml  { head :ok }
+      #AJAX
+      #format.xml  { head :ok }
+      format.js
     end
   end
 end

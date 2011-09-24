@@ -1,88 +1,91 @@
 class BooksController < ApplicationController
-  # GET /books
-  # GET /books.xml
-  def index
-    @books = Book.all
+  helper_method :sort_column, :sort_direction
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @books }
-    end
+
+  def index
+    @books = Book.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
   end
 
-  # GET /books/1
-  # GET /books/1.xml
   def show
     @book = Book.find(params[:id])
     @subject = Subject.find(@book.subject_id)
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @book }
-    end
   end
 
-  # GET /books/new
-  # GET /books/new.xml
   def new
     @book = Book.new
     @subjects = Subject.find(:all, :order => 'subject_name')
 
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @book }
-    end
+    #respond_to do |format|
+     # format.html # new.html.erb
+      #format.xml  { render :xml => @book }
+    #end
   end
 
-  # GET /books/1/edit
+
   def edit
     @book = Book.find(params[:id])
     @subjects = Subject.find(:all, :order => 'subject_name')
   end
 
-  # POST /books
-  # POST /books.xml
+
   def create
     @book = Book.new(params[:book])
     @subjects = Subject.find(:all, :order => 'subject_name')
 
-    respond_to do |format|
+   #respond_to do |format|
       if @book.save
-        format.html { redirect_to(@book, :notice => 'Book was successfully created.') }
-        format.xml  { render :xml => @book, :status => :created, :location => @book }
+       flash[:notice] = "Book was successfully added."
+       redirect_to @book
+       #format.html { redirect_to(@book, :notice => 'Book was successfully created.') }
+       #format.xml  { render :xml => @book, :status => :created, :location => @book }
       else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @book.errors, :status => :unprocessable_entity }
+        render :action => 'new'
+        #format.html { render :action => "new" }
+        #format.xml  { render :xml => @book.errors, :status => :unprocessable_entity }
       end
-    end
+    #end
   end
 
-  # PUT /books/1
-  # PUT /books/1.xml
+
   def update
     @book = Book.find(params[:id])
 
-    respond_to do |format|
+    #respond_to do |format|
       if @book.update_attributes(params[:book])
-        format.html { redirect_to(@book, :notice => 'Book was successfully updated.') }
-        format.xml  { head :ok }
+        flash[:notice] = "Book was successfully added."
+        redirect_to @book
+        #format.html { redirect_to(@book, :notice => 'Book was successfully updated.') }
+        #format.xml  { head :ok }
       else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @book.errors, :status => :unprocessable_entity }
+        render :action => 'edit'
+        #format.html { render :action => "edit" }
+        #format.xml  { render :xml => @book.errors, :status => :unprocessable_entity }
       end
-    end
+   # end
   end
 
-  # DELETE /books/1
-  # DELETE /books/1.xml
+
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
 
-    respond_to do |format|
-      format.html { redirect_to(books_url) }
-      format.xml  { head :ok }
-    end
+    flash[:notice] = "Successfully removed the book from the list."
+    redirect_to book_url
+    #respond_to do |format|
+    #  format.html { redirect_to(books_url) }
+    #  format.xml  { head :ok }
+    #end
   end
+
+  private
+
+  def sort_column
+    Book.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end
+

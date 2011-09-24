@@ -1,0 +1,22 @@
+
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<table class="pretty">
+  <tr>
+    <th><%= sortable "title" %></th>
+    <th><%= sortable "author" %></th>
+    <th><%= sortable "price" %></th>
+    <th><%= "Comments" %><th>
+  </tr>
+
+  <% for book in @books %>
+    <tr>
+      <td><%= book.title %></td>
+      <td><%= book.author %></td>
+      <td><%= book.price %></td>
+      <td><%=book.comments %></td>
+    </tr>
+  <% end %>
+</table>
+<%= will_paginate @books %>

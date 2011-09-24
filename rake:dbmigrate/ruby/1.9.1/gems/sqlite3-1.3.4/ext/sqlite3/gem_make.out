@@ -1,0 +1,13 @@
+/Users/bharathis/.rvm/rubies/ruby-1.9.2-p290/bin/ruby extconf.rb 
+checking for sqlite3.h... yes
+checking for sqlite3_libversion_number() in -lsqlite3... yes
+checking for rb_proc_arity()... yes
+checking for sqlite3_initialize()... yes
+checking for sqlite3_backup_init()... yes
+checking for sqlite3_column_database_name()... no
+checking for sqlite3_enable_load_extension()... no
+checking for sqlite3_load_extension()... no
+creating Makefile
+
+make
+Makefile:148: *** target pattern contains no `%'.  Stop.
